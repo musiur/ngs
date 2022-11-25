@@ -131,12 +131,14 @@ const NavigationBar = () => {
     <Navbar variant="sticky" maxWidth="fluid" style={{ zIndex: 1000 }}>
       <Navbar.Toggle showIn="xs" />
 
-      <div className="relative containerGl flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
+      <Navbar.Brand className="containerGl">
+      <div className="relative flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
          <Image src={NGS_LOGO} alt="me" width="64" height="64" />
-        <span className="font-bold text-lg lg:text-xl">
+        <span className="font-bold text-lg lg:text-xl hidden md:block">
           National <br/> Grammer School
         </span>
          </div>
+      </Navbar.Brand>
       <Navbar.Content
         enableCursorHighlight
         activeColor="success"
