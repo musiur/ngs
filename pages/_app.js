@@ -14,7 +14,9 @@ const lightTheme = createTheme({
     colors: {
       // generic colors
       white: "#ffffff",
+      whiteBlured: "#ffffff66",
       black: "#000000",
+      blackBlured: "#00000066",
 
       // background colors (light)
       background: "$white",
@@ -58,6 +60,11 @@ const darkTheme = createTheme({
   type: "dark",
   theme: {
     colors: {
+      white: "#000000",
+      whiteBlured: "#00000066",
+      black: "#ffffff",
+      blackBlured: "#ffffff66",
+
       primaryLight: "$green200",
       primaryLightHover: "$green300",
       primaryLightActive: "$green400",

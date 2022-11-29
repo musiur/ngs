@@ -1,17 +1,7 @@
 import { Card, Col, Row, Button, Text } from "@nextui-org/react";
 
 const TeachersCard = () => (
-  <Card css={{ w: "100%", h: "350px" }}>
-    <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-      <Col>
-        <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
-          Your day your way
-        </Text>
-        <Text h3 color="white">
-          Your checklist for better sleep
-        </Text>
-      </Col>
-    </Card.Header>
+  <Card variant="bordered" css={{ w: "100%", h: "350px" }}>
     <Card.Body css={{ p: 0 }}>
       <Card.Image
         src="/static/images/teacher.webp"
@@ -25,8 +15,7 @@ const TeachersCard = () => (
       isBlurred
       css={{
         position: "absolute",
-        bgBlur: "#ffffff66",
-        borderTop: "$borderWeights$light solid $gray800",
+        bgBlur: "$whiteBlurred",
         bottom: 0,
         zIndex: 1,
       }}
@@ -34,21 +23,12 @@ const TeachersCard = () => (
       <Row>
         <Col>
           <Row>
-            <Col span={3}>
-              <Card.Image
-                src="https://nextui.org/images/breathing-app-icon.jpeg"
-                css={{ bg: "black", br: "50%" }}
-                height={40}
-                width={40}
-                alt="Breathing app icon"
-              />
-            </Col>
             <Col>
-              <Text color="#d1d1d1" size={12}>
-                Breathing App
+              <Text color="$blackBlurred" size={12} className="font-bold">
+                John Doe
               </Text>
-              <Text color="#d1d1d1" size={12}>
-                Get a good nights sleep.
+              <Text color="$blackBlurred" size={12}>
+                Assitant Teacher for Physics
               </Text>
             </Col>
           </Row>
@@ -62,12 +42,12 @@ const TeachersCard = () => (
               css={{ color: "#94f9f0", bg: "#94f9f026" }}
             >
               <Text
-                css={{ color: "inherit" }}
+                css={{ color: "$primary" }}
                 size={12}
                 weight="bold"
                 transform="uppercase"
               >
-                Get App
+                Details
               </Text>
             </Button>
           </Row>
