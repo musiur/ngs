@@ -183,6 +183,7 @@ const NavigationBar = () => {
             )
           }
           onClick={(e) => setTheme(isDark ? "light" : "dark")}
+          className="cursor-pointer"
         />
 
         <Dropdown placement="bottom-right">
@@ -202,10 +203,7 @@ const NavigationBar = () => {
             color="primary"
             onAction={(actionKey) => console.log({ actionKey })}
           >
-            <Dropdown.Item key="analytics" withDivider>
-              <Link href="/admin">Admin</Link>
-            </Dropdown.Item>
-            <Dropdown.Item key="logout" withDivider color="error">
+            <Dropdown.Item key="logout" color="error">
               Log Out
             </Dropdown.Item>
           </Dropdown.Menu>
