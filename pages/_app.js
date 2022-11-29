@@ -60,9 +60,9 @@ const darkTheme = createTheme({
   type: "dark",
   theme: {
     colors: {
-      white: "#000000",
+      white: "#ffffff",
       whiteBlured: "#00000066",
-      black: "#ffffff",
+      black: "#000000",
       blackBlured: "#ffffff66",
 
       primaryLight: "$green200",
