@@ -8,7 +8,7 @@ const ButtonG = ({ text, color, func }) => {
       auto
       style={{
         background: theme.colors[color].value,
-        boxShadow: `0 3px 10px 0 ${theme.colors[color].value}`,
+        // boxShadow: `0 3px 10px 0 ${theme.colors[color].value}`,
       }}
       onPress={func}
     >
@@ -19,7 +19,7 @@ const ButtonG = ({ text, color, func }) => {
       auto
       style={{
         background: theme.colors[color].value,
-        boxShadow: `0 3px 10px 0 ${theme.colors[color].value}`,
+        // boxShadow: `0 3px 10px 0 ${theme.colors[color].value}`,
       }}
     >
       {text}

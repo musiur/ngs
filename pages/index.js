@@ -1,8 +1,25 @@
 import { Card, Image, useTheme } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Login from "../components/login/login";
+
+const winD = typeof window !== "undefined";
 
 const Home = () => {
   const { theme } = useTheme();
+  const router = useRouter();
+  const [visible, setVisible] = useState(false);
+  const handler = () => setVisible(true);
+  const closeHandler = () => {
+    setVisible(false);
+  };
+  const loginHandler = () => {
+    setVisible(false);
+    winD && sessionStorage.setItem("loggedin", "yes", 2);
+    router.push("/admin");
+  };
+
   const heroItems = [
     { text: "Teachers", color: "#F31260", link: "/teachers" },
     { text: "Students", color: "#7828C8", link: "/students" },
@@ -16,7 +33,20 @@ const Home = () => {
       <div className="w-full min-h-[50vh] max-h-[70vh] homehero"></div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sectionG containerG">
         {heroItems.map((item, i) => {
-          return (
+          return item.text === "Admin" ? (
+            <div key={i}>
+              <Card
+                isPressable
+                isHoverable
+                variant="bordered"
+                className={`w-full min-h-[100px] flex items-center justify-center font-bold text-lg lg:text-2xl text-white`}
+                style={{ background: item.color }}
+                onClick={handler}
+              >
+                {item.text}
+              </Card>
+            </div>
+          ) : (
             <Link key={i} href={item.link}>
               <Card
                 isPressable
@@ -31,6 +61,9 @@ const Home = () => {
           );
         })}
       </div>
+      {
+        visible ? <Login props={{visible, closeHandler, loginHandler}}/> : null
+      }
     </div>
   );
 };

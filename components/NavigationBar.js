@@ -141,7 +141,7 @@ const NavigationBar = () => {
       </Navbar.Brand>
       <Navbar.Content
         enableCursorHighlight
-        activeColor="success"
+        activeColor="primary"
         hideIn="xs"
         variant="highlight-rounded"
       >
@@ -194,7 +194,7 @@ const NavigationBar = () => {
               <Avatar
                 bordered
                 as="button"
-                color="success"
+                color="primary"
                 size="md"
                 src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
               />
@@ -202,7 +202,7 @@ const NavigationBar = () => {
           </Navbar.Item>
           <Dropdown.Menu
             aria-label="User menu actions"
-            color="secondary"
+            color="primary"
             onAction={(actionKey) => console.log({ actionKey })}
           >
             <Dropdown.Item key="profile" css={{ height: "$18" }}>
@@ -235,7 +235,7 @@ const NavigationBar = () => {
         {collapseItems.map((item, index) => (
           <Navbar.CollapseItem
             key={item}
-            activeColor="success"
+            activeColor="primary"
             css={{
               color: index === collapseItems.length - 1 ? "$error" : "",
             }}
