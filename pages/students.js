@@ -1,6 +1,10 @@
+import Layout from "../Layout/Layout";
+
 const Students = () => {
     return (
-        <div className="containerG">Students</div>
+        <Layout>
+            <div className="containerG">Students</div>
+        </Layout>
     )
 }
 

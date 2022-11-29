@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Login from "../components/login/login";
+import Layout from "../Layout/Layout";
 
 const winD = typeof window !== "undefined";
 
@@ -29,7 +30,7 @@ const Home = () => {
     { text: "Gallary", color: "#F31260", link: "/gallary" },
   ];
   return (
-    <div>
+    <Layout>
       <div className="w-full min-h-[50vh] max-h-[70vh] homehero"></div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sectionG containerG">
         {heroItems.map((item, i) => {
@@ -64,7 +65,7 @@ const Home = () => {
       {
         visible ? <Login props={{visible, closeHandler, loginHandler}}/> : null
       }
-    </div>
+    </Layout>
   );
 };
 

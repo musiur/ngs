@@ -1,6 +1,10 @@
+import Layout from "../Layout/Layout";
+
 const Notice = () => {
     return (
-        <div className="containerG"> Notice </div>
+        <Layout>
+            <div className="containerG"> Notice </div>
+        </Layout>
     )
 }
 

@@ -1,3 +1,4 @@
+import Layout from "../Layout/Layout";
 
 
 
@@ -5,8 +6,9 @@ const About = () => {
   
 
   return (
-    <div className="containerG">About
-    </div>
+    <Layout>
+      <div className="containerG">About</div>
+    </Layout>
   )
 }
 

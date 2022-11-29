@@ -1,7 +1,11 @@
+import Layout from "../Layout/Layout";
+
 const Gallary = () => {
-    return (
-        <div className="containerG">Gallary</div>
-    )
-}
+  return (
+    <Layout>
+      <div className="containerG">Gallary</div>
+    </Layout>
+  );
+};
 
 export default Gallary;

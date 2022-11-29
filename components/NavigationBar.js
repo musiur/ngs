@@ -1,5 +1,4 @@
 import {
-  Text,
   Navbar,
   Link,
   Avatar,
@@ -115,15 +114,10 @@ const NavigationBar = () => {
   const { isDark, type } = useTheme();
   const router = useRouter();
   const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
+    "Home",
+    "About",
+    "Event",
+    "Contact",
     "Log Out",
   ];
 
@@ -148,6 +142,9 @@ const NavigationBar = () => {
         <Navbar.Link isActive={router.pathname.includes("/")} href="/">
           Home
         </Navbar.Link>
+        {/* <Navbar.Link isActive={router.pathname.includes("/admin")} href="/admin">
+          Admin
+        </Navbar.Link> */}
         <Navbar.Link
           isActive={router.pathname.includes("/about")}
           href="/about"
@@ -205,25 +202,8 @@ const NavigationBar = () => {
             color="primary"
             onAction={(actionKey) => console.log({ actionKey })}
           >
-            <Dropdown.Item key="profile" css={{ height: "$18" }}>
-              <Text b color="inherit" css={{ d: "flex" }}>
-                Signed in as
-              </Text>
-              <Text b color="inherit" css={{ d: "flex" }}>
-                zoey@example.com
-              </Text>
-            </Dropdown.Item>
-            <Dropdown.Item key="settings" withDivider>
-              My Settings
-            </Dropdown.Item>
-            <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
             <Dropdown.Item key="analytics" withDivider>
-              Analytics
-            </Dropdown.Item>
-            <Dropdown.Item key="system">System</Dropdown.Item>
-            <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
-            <Dropdown.Item key="help_and_feedback" withDivider>
-              Help & Feedback
+              <Link href="/admin">Admin</Link>
             </Dropdown.Item>
             <Dropdown.Item key="logout" withDivider color="error">
               Log Out

@@ -1,7 +1,11 @@
+import Layout from "../Layout/Layout";
+
 const Events = () => {
-    return (
-        <div className="containerG">Events</div>
-    )
-}
+  return (
+    <Layout>
+      <div className="containerG">Events</div>
+    </Layout>
+  );
+};
 
 export default Events;
