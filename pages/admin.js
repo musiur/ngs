@@ -19,7 +19,7 @@ const Admin = () => {
   return (
     <WithPrivateRoute>
       <div className="containerG sectionG grid grid-cols-12 gap-5">
-        <div className="col-span-3 h-screen sticky top-[100px] left-0">
+        <div className="col-span-3">
           <ul>
             {sideNavContents.map((item, i) => {
               return (
