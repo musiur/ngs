@@ -1,10 +1,4 @@
-import {
-  Navbar,
-  Link,
-  Avatar,
-  Dropdown,
-  useTheme,
-} from "@nextui-org/react";
+import { Navbar, Link, Avatar, Dropdown, useTheme } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { useTheme as useNextTheme } from "next-themes";
 import Image from "next/image";
@@ -113,25 +107,22 @@ const NavigationBar = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const router = useRouter();
-  const collapseItems = [
-    "Home",
-    "About",
-    "Event",
-    "Contact",
-    "Log Out",
-  ];
+  const collapseItems = ["Home", "About", "Events", "Contact", "Log Out"];
 
   return (
     <Navbar variant="sticky" maxWidth="fluid" style={{ zIndex: 1000 }}>
       <Navbar.Toggle showIn="xs" />
 
       <Navbar.Brand className="containerGl">
-      <div className="relative flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
-         <Image src={NGS_LOGO} alt="me" width="64" height="64" />
-        <span className="font-bold text-lg lg:text-xl hidden md:block">
-          National <br/> Grammer School
-        </span>
-         </div>
+        <div
+          className="relative flex items-center gap-3 cursor-pointer"
+          onClick={() => router.push("/")}
+        >
+          <Image src={NGS_LOGO} alt="me" width="64" height="64" />
+          <span className="font-bold text-lg lg:text-xl hidden md:block">
+            National <br /> Grammer School
+          </span>
+        </div>
       </Navbar.Brand>
       <Navbar.Content
         enableCursorHighlight
@@ -204,7 +195,14 @@ const NavigationBar = () => {
             onAction={(actionKey) => console.log({ actionKey })}
           >
             <Dropdown.Item key="logout" color="error">
-              Log Out
+              <span
+                onClick={() => {
+                  sessionStorage.setItem("loggedin", "no", 2);
+                  router.push("/");
+                }}
+              >
+                Log Out
+              </span>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
@@ -224,7 +222,7 @@ const NavigationBar = () => {
               css={{
                 minWidth: "100%",
               }}
-              href="#"
+              href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
             >
               {item}
             </Link>
