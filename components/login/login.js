@@ -41,7 +41,7 @@ const Password = ({ fill, size, height, width, ...props }) => {
 };
 
 const Login = ({ props }) => {
-  const { visible, closeHandler, setVisible } = props;
+  const { visible, closeHandler, loginHandler } = props;
   return (
     <div>
       <Modal
@@ -87,9 +87,9 @@ const Login = ({ props }) => {
         </Modal.Body>
         <Modal.Footer>
           <div >
-          <ButtonG text="Close" color="error" onClick={() => setVisible(false)}/>
+          <ButtonG text="Close" color="error" func={closeHandler} />
           </div>
-          <ButtonG text="Sign in" color="primary" func={closeHandler} />
+          <ButtonG text="Sign in" color="primary" func={loginHandler}/>
         </Modal.Footer>
       </Modal>
     </div>
