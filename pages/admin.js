@@ -1,4 +1,4 @@
-import WithPrivateRoute from "../hoc/withPrivateRoute";
+import WithPrivateRoute from "../hoc/WithPrivateRoute";
 
 const Admin = () => {
   const sideNavContents = [
