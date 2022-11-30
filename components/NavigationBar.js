@@ -103,11 +103,15 @@ export const MoonIcon = ({
   );
 };
 
+const winD = typeof window !== "undefined";
+
 const NavigationBar = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const router = useRouter();
   const collapseItems = ["About", "Contact"];
+  const loggedin =
+    winD && sessionStorage.getItem("loggedin") === "yes" ? true : false;
 
   return (
     <Navbar variant="sticky" maxWidth="fluid" style={{ zIndex: 1000 }}>
@@ -165,7 +169,8 @@ const NavigationBar = () => {
           className="cursor-pointer"
         />
 
-        <Dropdown placement="bottom-right">
+        {
+          loggedin ? <Dropdown placement="bottom-right">
           <Navbar.Item>
             <Dropdown.Trigger>
               <Avatar
@@ -194,7 +199,8 @@ const NavigationBar = () => {
               </div>
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> : null
+        }
       </Navbar.Content>
       <Navbar.Collapse>
         {collapseItems.map((item, index) => (
