@@ -1,6 +1,6 @@
 import { Card, Col, Row, Button, Text } from "@nextui-org/react";
 
-const TeachersCard = () => (
+const TeachersCard = ({props}) => (
   <Card variant="bordered" css={{ w: "100%", h: "350px" }}>
     <Card.Body css={{ p: 0 }}>
       <Card.Image
@@ -40,6 +40,7 @@ const TeachersCard = () => (
               auto
               rounded
               css={{ color: "#94f9f0", bg: "#94f9f026" }}
+              onClick={() => console.log(props.item)}
             >
               <Text
                 css={{ color: "$primary" }}

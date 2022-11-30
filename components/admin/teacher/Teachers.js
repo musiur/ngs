@@ -5,10 +5,14 @@ import TeachersTable from "./TeachersTable";
 import { Button } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
 import AddTeacher from "./AddTeacher";
+
+
 const Teachers = () => {
+  const [paginatedIndex, setPaginatedIndex] = useState(0);
+  const cardsPerPage = 6;
   const teachersContents = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9
-  ];//, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ];
   const [selectedTab, setSeletedTab] = useState("Teachers");
   const setTeachers = () => {
     setSeletedTab("Teachers");
@@ -43,12 +47,20 @@ const Teachers = () => {
       {selectedTab === "Teachers" ? (
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-            {teachersContents.map((item, i) => {
-              return <TeachersCard key={i} props={{ item }} />;
-            })}
+            {teachersContents
+              .slice(paginatedIndex, paginatedIndex + cardsPerPage)
+              .map((item, i) => {
+                return <TeachersCard key={i} props={{ item }} />;
+              })}
           </div>
           <div className="py-10">
-          <Pagination loop color="primary" total={10} initialPage={6}/>
+            <Pagination
+              // controls={false}
+              color="primary"
+              total={teachersContents.length / cardsPerPage + 1}
+              initialPage={1}
+              onChange={(e) => paginatedIndex !== 1 && setPaginatedIndex((e - 1) * cardsPerPage)}
+            />
           </div>
         </div>
       ) : null}
@@ -57,11 +69,14 @@ const Teachers = () => {
           <TeachersTable />
         </div>
       ) : null}
-      {selectedTab === "Add new" ? <div>
-        <AddTeacher />
-      </div> : null}
+      {selectedTab === "Add new" ? (
+        <div>
+          <AddTeacher />
+        </div>
+      ) : null}
     </div>
   );
 };
+
 
 export default Teachers;
