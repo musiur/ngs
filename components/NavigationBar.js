@@ -107,7 +107,7 @@ const NavigationBar = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const router = useRouter();
-  const collapseItems = ["Home", "About", "Events", "Contact", "Log Out"];
+  const collapseItems = ["About", "Contact"];
 
   return (
     <Navbar variant="sticky" maxWidth="fluid" style={{ zIndex: 1000 }}>
@@ -130,20 +130,11 @@ const NavigationBar = () => {
         hideIn="xs"
         variant="highlight-rounded"
       >
-        <Navbar.Link isActive={router.pathname.includes("/")} href="/">
-          Home
-        </Navbar.Link>
         <Navbar.Link
           isActive={router.pathname.includes("/about")}
           href="/about"
         >
           About
-        </Navbar.Link>
-        <Navbar.Link
-          isActive={router.pathname.includes("/events")}
-          href="/events"
-        >
-          Events
         </Navbar.Link>
         <Navbar.Link
           isActive={router.pathname.includes("/contact")}
@@ -192,14 +183,15 @@ const NavigationBar = () => {
             onAction={(actionKey) => console.log({ actionKey })}
           >
             <Dropdown.Item key="logout" color="error">
-              <span
+              <div
                 onClick={() => {
                   sessionStorage.setItem("loggedin", "no", 2);
                   router.push("/");
                 }}
+                className="w-full flex"
               >
                 Log Out
-              </span>
+              </div>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

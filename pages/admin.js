@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Teachers from "../components/admin/teacher/Teachers";
 import { useRouter } from "next/router";
 import Layout from "../Layout/Layout";
+import Students from "../components/admin/student/Students";
+import Notices from "../components/admin/notice/Notices";
 
 const Admin = () => {
   const router = useRouter();
@@ -41,6 +43,10 @@ const Admin = () => {
           </div>
           <div className="col-span-9">
             {selectedTab === "Teacher" ? <Teachers /> : null}
+            {selectedTab === "Student" ? <Students /> : null}
+            {selectedTab === "Notice" ? <Notices /> : null}
+            {selectedTab === "Results" ? <div>Comming soon</div> : null}
+            {selectedTab === "Gallary" ? <div>Comming soon</div> : null}
           </div>
         </div>
       </Layout>

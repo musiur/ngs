@@ -1,17 +1,16 @@
-import TeachersCard from "./TeachersCard";
 import ButtonG from "../../ButtonG";
 import { useState } from "react";
-import TeachersTable from "./TeachersTable";
 import { Button } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
-import AddTeacher from "./AddTeacher";
-const Teachers = () => {
-  const teachersContents = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9
-  ];//, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  const [selectedTab, setSeletedTab] = useState("Teachers");
-  const setTeachers = () => {
-    setSeletedTab("Teachers");
+import NoticesCard from "./NoticesCard";
+import NoticesTable from "./NoticesTable";
+import AddNotice from "./AddNotice";
+
+const Notices = () => {
+  const NoticesContents = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  const [selectedTab, setSeletedTab] = useState("Notices");
+  const setNotices = () => {
+    setSeletedTab("Notices");
   };
   const setManage = () => {
     setSeletedTab("Manage");
@@ -24,9 +23,9 @@ const Teachers = () => {
       <div className="pb-5">
         <Button.Group>
           <ButtonG
-            text="Teachers"
-            color={selectedTab === "Teachers" ? "primary" : "primaryBorder"}
-            func={setTeachers}
+            text="Notices"
+            color={selectedTab === "Notices" ? "primary" : "primaryBorder"}
+            func={setNotices}
           />
           <ButtonG
             text="Manage"
@@ -40,28 +39,30 @@ const Teachers = () => {
           />
         </Button.Group>
       </div>
-      {selectedTab === "Teachers" ? (
+      {selectedTab === "Notices" ? (
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-            {teachersContents.map((item, i) => {
-              return <TeachersCard key={i} props={{ item }} />;
+            {NoticesContents.map((item, i) => {
+              return <NoticesCard key={i} props={{ item }} />;
             })}
           </div>
           <div className="py-10">
-          <Pagination loop color="primary" total={10} initialPage={6}/>
+            <Pagination loop color="primary" total={10} initialPage={6} />
           </div>
         </div>
       ) : null}
       {selectedTab === "Manage" ? (
         <div>
-          <TeachersTable />
+          <NoticesTable />
         </div>
       ) : null}
-      {selectedTab === "Add new" ? <div>
-        <AddTeacher />
-      </div> : null}
+      {selectedTab === "Add new" ? (
+        <div>
+          <AddNotice />
+        </div>
+      ) : null}
     </div>
   );
 };
 
-export default Teachers;
+export default Notices;

@@ -11,14 +11,22 @@ const Home = () => {
   const { theme } = useTheme();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
+  const handler = () => {
+    const loggedin =
+      winD && sessionStorage.getItem("loggedin") === "yes" ? true : false;
+    if (loggedin) {
+      router.push("/admin");
+    } else {
+      setVisible(true);
+    }
+  };
   const closeHandler = () => {
     setVisible(false);
   };
   const loginHandler = () => {
-    setVisible(false);
     winD && sessionStorage.setItem("loggedin", "yes", 2);
     router.push("/admin");
+    setVisible(false);
   };
 
   const heroItems = [
@@ -62,9 +70,7 @@ const Home = () => {
           );
         })}
       </div>
-      {
-        visible ? <Login props={{visible, closeHandler, loginHandler}}/> : null
-      }
+      <Login props={{ visible, closeHandler, loginHandler }} />
     </Layout>
   );
 };
