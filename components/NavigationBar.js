@@ -173,7 +173,7 @@ const NavigationBar = () => {
                 as="button"
                 color="primary"
                 size="md"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                src="/static/images/profile.webp"
               />
             </Dropdown.Trigger>
           </Navbar.Item>

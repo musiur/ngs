@@ -4,7 +4,7 @@ const StudentsCard = () => (
   <Card variant="bordered" css={{ w: "100%", h: "350px" }}>
     <Card.Body css={{ p: 0 }}>
       <Card.Image
-        src="/static/images/teacher.webp"
+        src="/static/images/student.webp"
         objectFit="cover"
         width="100%"
         height="100%"
