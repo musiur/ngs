@@ -118,7 +118,7 @@ const NavigationBar = () => {
           className="relative flex items-center gap-3 cursor-pointer"
           onClick={() => router.push("/")}
         >
-          <Image src={NGS_LOGO} alt="me" width="64" height="64" />
+          <Image src={NGS_LOGO} alt="me" width="54" height="54" />
           <span className="font-bold text-lg lg:text-xl hidden md:block">
             National <br /> Grammer School
           </span>
@@ -133,9 +133,6 @@ const NavigationBar = () => {
         <Navbar.Link isActive={router.pathname.includes("/")} href="/">
           Home
         </Navbar.Link>
-        {/* <Navbar.Link isActive={router.pathname.includes("/admin")} href="/admin">
-          Admin
-        </Navbar.Link> */}
         <Navbar.Link
           isActive={router.pathname.includes("/about")}
           href="/about"
