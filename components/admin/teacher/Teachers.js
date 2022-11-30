@@ -57,8 +57,9 @@ const Teachers = () => {
             <Pagination
               // controls={false}
               color="primary"
-              total={teachersContents.length / cardsPerPage + 1}
+              total={Math.ceil(teachersContents.length / cardsPerPage)}
               initialPage={1}
+              
               onChange={(e) => paginatedIndex !== 1 && setPaginatedIndex((e - 1) * cardsPerPage)}
             />
           </div>
