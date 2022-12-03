@@ -41,7 +41,11 @@ const Password = ({ fill, size, height, width, ...props }) => {
 };
 
 const AddTeacher = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [errorMessage, setErrorMessage] = useState(formData);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,13 +60,13 @@ const AddTeacher = () => {
     let obj = {};
 
     return obj;
-  }
+  };
 
   const handleAPI = () => {
-    if(Object.keys(errorMessage).length === 0){
-        console.log(formData);
-    }else{
-        console.log(errorMessage)
+    if (Object.keys(errorMessage).length === 0) {
+      console.log(formData);
+    } else {
+      console.log(errorMessage);
     }
   };
   useEffect(() => {
@@ -79,10 +83,11 @@ const AddTeacher = () => {
           fullWidth
           color="primary"
           size="lg"
-          placeholder="Email"
+          placeholder="e.g John Doe"
           contentLeft={<Mail fill="currentColor" />}
           onChange={handleChange}
-          name="email"
+          name="username"
+          label="Username"
         />
         <Input
           clearable
@@ -90,12 +95,24 @@ const AddTeacher = () => {
           fullWidth
           color="primary"
           size="lg"
-          placeholder="Password"
+          placeholder="e.g abc@xyz.com"
+          contentLeft={<Mail fill="currentColor" />}
+          onChange={handleChange}
+          name="email"
+          label="Email Address"
+        />
+        <Input
+          clearable
+          bordered
+          fullWidth
+          color="primary"
+          size="lg"
           contentLeft={<Password fill="currentColor" />}
           onChange={handleChange}
           name="password"
+          label="Password"
         />
-        <ButtonG text="Add new" color="primary" func={handleAdd} />
+        <ButtonG text="Add new" color="primary" func={handleAdd} className="pt-10"/>
       </form>
     </div>
   );

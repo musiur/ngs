@@ -1,6 +1,6 @@
 import ButtonG from "../../ButtonG";
 import { useState } from "react";
-import { Button } from "@nextui-org/react";
+import { Badge, Button } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
 import NoticesCard from "./NoticesCard";
 import NoticesTable from "./NoticesTable";
@@ -38,6 +38,9 @@ const Notices = () => {
             func={setAddNew}
           />
         </Button.Group>
+        <Badge variant="flat" color="error" size="xs" className="pl-2">
+            Developing
+          </Badge>
       </div>
       {selectedTab === "Notices" ? (
         <div>

@@ -1,7 +1,7 @@
 import { Card, Col, Row, Button, Text } from "@nextui-org/react";
 
 const TeachersCard = ({props}) => (
-  <Card variant="bordered" css={{ w: "100%", h: "350px" }}>
+  <Card variant="bordered" css={{ w: "100%", h: "350px" }} className="hover:shadow-xl">
     <Card.Body css={{ p: 0 }}>
       <Card.Image
         src="/static/images/teacher.webp"

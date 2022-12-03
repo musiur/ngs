@@ -1,22 +1,20 @@
 import WithPrivateRoute from "../hoc/WithPrivateRoute";
-import { Card, Text } from "@nextui-org/react";
+import { Badge, Card, Text } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import Teachers from "../components/admin/teacher/Teachers";
-import { useRouter } from "next/router";
 import Layout from "../Layout/Layout";
 import Students from "../components/admin/student/Students";
 import Notices from "../components/admin/notice/Notices";
 
 const Admin = () => {
-  const router = useRouter();
   const sideNavContents = [
-    "Teacher",
-    "Student",
+    "Teachers",
+    "Students",
     "Notice",
     "Results",
     "Gallary",
   ];
-  const [selectedTab, setSelectedTab] = useState("Teacher");
+  const [selectedTab, setSelectedTab] = useState("Teachers");
 
   useEffect(() => {
     console.log(selectedTab);
@@ -42,11 +40,33 @@ const Admin = () => {
             </ul>
           </div>
           <div className="col-span-9">
-            {selectedTab === "Teacher" ? <Teachers /> : null}
-            {selectedTab === "Student" ? <Students /> : null}
+            {selectedTab === "Teachers" ? <Teachers /> : null}
+            {selectedTab === "Students" ? <Students /> : null}
             {selectedTab === "Notice" ? <Notices /> : null}
-            {selectedTab === "Results" ? <div>Comming soon</div> : null}
-            {selectedTab === "Gallary" ? <div>Comming soon</div> : null}
+            {selectedTab === "Results" ? (
+              <div>
+                <Badge
+                  variant="flat"
+                  color="primary"
+                  size="xs"
+                  className="pl-2"
+                >
+                  Comming soon...
+                </Badge>
+              </div>
+            ) : null}
+            {selectedTab === "Gallary" ? (
+              <div>
+                <Badge
+                  variant="flat"
+                  color="primary"
+                  size="xs"
+                  className="pl-2"
+                >
+                  Comming soon...
+                </Badge>
+              </div>
+            ) : null}
           </div>
         </div>
       </Layout>
@@ -66,6 +86,16 @@ const LiCard = ({ text, setSelectedTab, selectedTab }) => {
     >
       <Text className="w-full px-2 py-3" onClick={() => setSelectedTab(text)}>
         {text}
+        {["Results", "Gallary"].includes(text) ? (
+          <Badge variant="flat" color="primary" size="xs" className="pl-2">
+            Comming soon...
+          </Badge>
+        ) : null}
+        {["Students", "Notice"].includes(text) ? (
+          <Badge variant="flat" color="error" size="xs" className="pl-2">
+            Developing
+          </Badge>
+        ) : null}
       </Text>
     </Card>
   );

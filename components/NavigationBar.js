@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useTheme as useNextTheme } from "next-themes";
 import Image from "next/image";
 import NGS_LOGO from "../static/images/ngs-logo.png";
+import { useEffect, useState } from "react";
 
 export const SunIcon = ({
   fill = "currentColor",
@@ -106,12 +107,22 @@ export const MoonIcon = ({
 const winD = typeof window !== "undefined";
 
 const NavigationBar = () => {
+  const [loggedin, setLoggedin] = useState(false);
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const router = useRouter();
   const collapseItems = ["About", "Contact"];
-  const loggedin =
-    winD && sessionStorage.getItem("loggedin") === "yes" ? true : false;
+  
+  const loadLoginStatus = () => {
+    const loginStatus = winD && sessionStorage.getItem("loggedin") === "yes" ? true : false;
+    setLoggedin(loginStatus);
+  }
+  useEffect(() => {
+    loadLoginStatus();
+
+    () => loadLoginStatus();
+  }, [])
+    
 
   return (
     <Navbar variant="sticky" maxWidth="fluid" style={{ zIndex: 1000 }}>
@@ -134,6 +145,12 @@ const NavigationBar = () => {
         hideIn="xs"
         variant="highlight-rounded"
       >
+        <Navbar.Link
+          isActive={router.pathname.includes("/teachers")}
+          href="/teachers"
+        >
+          Teachers
+        </Navbar.Link>
         <Navbar.Link
           isActive={router.pathname.includes("/about")}
           href="/about"
