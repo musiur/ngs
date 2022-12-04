@@ -4,14 +4,14 @@ import TeachersCard from "./TeachersCard";
 
 const AllTeachers = () => {
   const [paginatedIndex, setPaginatedIndex] = useState(0);
-  const cardsPerPage = 6;
+  const cardsPerPage = 8;
   const teachersContents = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
   return (
     <div>
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
           {teachersContents
             .slice(paginatedIndex, paginatedIndex + cardsPerPage)
             .map((item, i) => {

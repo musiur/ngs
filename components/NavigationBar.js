@@ -208,7 +208,7 @@ const NavigationBar = () => {
               <div
                 onClick={() => {
                   sessionStorage.setItem("loggedin", "no", 2);
-                  router.push("/");
+                  router.reload("/");
                 }}
                 className="w-full flex"
               >

@@ -46,7 +46,7 @@ const Teachers = () => {
       </div>
       {selectedTab === "Teachers" ? (
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
             {teachersContents
               .slice(paginatedIndex, paginatedIndex + cardsPerPage)
               .map((item, i) => {
