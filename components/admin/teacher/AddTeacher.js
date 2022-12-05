@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/react";
+import { Input, Dropdown } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import ButtonG from "../../ButtonG";
 
@@ -42,41 +42,63 @@ const Password = ({ fill, size, height, width, ...props }) => {
 
 const AddTeacher = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState(formData);
+  const [teachersInSession, setTeachersInSession] = useState([]);
+  const [message, setMessage] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleAdd = () => {
-    // e.preventDefault();
-    setErrorMessage(validator(formData));
-  };
-
-  const validator = (data) => {
-    let obj = {};
-
-    return obj;
-  };
 
   const handleAPI = () => {
-    if (Object.keys(errorMessage).length === 0) {
-      console.log(formData);
-    } else {
-      console.log(errorMessage);
+    console.log(formData);
+    const newTeacher = {
+      id: teachersInSession.length + 1,
+      name: formData.name,
+      email: formData.email,
+      designation: formData.designation,
+      password: formData.password,
+      subject: formData.subject,
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
+    };
+    const allTeacher = [newTeacher,...teachersInSession];
+    if (window) {
+      sessionStorage.setItem("teachers", JSON.stringify(allTeacher));
+
+      setMessage(true);
+      document.getElementById("addTeacherForm").reset();
+
+      setTimeout(() => {
+        setMessage(false);
+      }, 3000);
     }
   };
-  useEffect(() => {
-    handleAPI();
 
-    return () => handleAPI();
-  }, [errorMessage]);
+  useEffect(() => {
+    if (window) {
+      const teacherFromSession = JSON.parse(sessionStorage.getItem("teachers"));
+      setTeachersInSession(teacherFromSession);
+    }
+  }, []);
+
+  const designation = [
+    { key: "at", name: "Asistant Teacher" },
+    { key: "pt", name: "Part-time Teacher" },
+  ];
+  const subjects = [
+    { key: "eng", name: "English" },
+    { key: "ben", name: "Bengali" },
+    { key: "mat", name: "Math" },
+    { key: "phy", name: "Physics" },
+  ];
+
   return (
     <div>
-      <form className="flex flex-col gap-5">
+      <form className="flex flex-col gap-5" id="addTeacherForm">
         <Input
           clearable
           bordered
@@ -84,10 +106,9 @@ const AddTeacher = () => {
           color="primary"
           size="lg"
           placeholder="e.g John Doe"
-          contentLeft={<Mail fill="currentColor" />}
           onChange={handleChange}
-          name="username"
-          label="Username"
+          name="name"
+          label="Name"
         />
         <Input
           clearable
@@ -101,6 +122,22 @@ const AddTeacher = () => {
           name="email"
           label="Email Address"
         />
+        <DropDown
+          props={{
+            handleChange,
+            menuItems: designation,
+            name: "designation",
+            deafultSet: "Designation",
+          }}
+        />
+        <DropDown
+          props={{
+            handleChange,
+            menuItems: subjects,
+            name: "subject",
+            deafultSet: "Subjects",
+          }}
+        />
         <Input
           clearable
           bordered
@@ -112,10 +149,55 @@ const AddTeacher = () => {
           name="password"
           label="Password"
         />
-        <ButtonG text="Add new" color="primary" func={handleAdd} className="pt-10"/>
+        <ButtonG
+          text="Add new"
+          color="primary"
+          func={handleAPI}
+          className="pt-10"
+        />
       </form>
+      {message ? (
+        <div className="my-5 py-2 px-2 border rounded-lg font-bold text-green-600 block">
+          New Teacher: {formData.name} Added!
+        </div>
+      ) : null}
     </div>
   );
 };
 
 export default AddTeacher;
+
+const DropDown = ({ props }) => {
+  const { handleChange, menuItems, name, deafultSet } = props;
+
+  const [selected, setSelected] = useState(deafultSet);
+
+  return (
+    <Dropdown>
+      <Dropdown.Button bordered>{selected}</Dropdown.Button>
+      <Dropdown.Menu
+        aria-label="Dynamic Actions"
+        items={menuItems}
+        onAction={(key) => {
+          const selectedValue = menuItems.find((item) => item.key === key).name;
+          setSelected(selectedValue);
+          handleChange({
+            target: {
+              name,
+              value: selectedValue,
+            },
+          });
+        }}
+      >
+        {(item) => (
+          <Dropdown.Item
+            key={item.key}
+            color={item.key === "delete" ? "error" : "default"}
+          >
+            {item.name}
+          </Dropdown.Item>
+        )}
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+};

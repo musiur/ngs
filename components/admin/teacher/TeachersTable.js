@@ -1,5 +1,16 @@
-import { Table, Row, Col, Tooltip, User, Text } from "@nextui-org/react";
+import {
+  Table,
+  Row,
+  Col,
+  Tooltip,
+  User,
+  Text,
+  Modal,
+  Input,
+} from "@nextui-org/react";
 import { styled } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import ButtonG from "../../ButtonG";
 
 const StyledBadge = styled("span", {
   display: "inline-block",
@@ -169,114 +180,125 @@ const DeleteIcon = ({ fill, size, height, width, ...props }) => {
 };
 
 const TeachersTable = () => {
-  const columns = [
-    { name: "NAME", uid: "name" },
-    { name: "ROLE", uid: "role" },
-    { name: "STATUS", uid: "status" },
-    { name: "ACTIONS", uid: "actions" },
-  ];
-  const users = [
+  const [visibleEdit, setVisibleEdit] = useState(false);
+  const [teachersInSession, setTeachersInSession] = useState([]);
+  const openHandlerEdit = (id) => {
+    setVisibleEdit(true);
+    console.log(id);
+  };
+  const closeHandlerEdit = () => {
+    setVisibleEdit(false);
+  };
+  const submitHandlerEdit = () => {
+    setVisibleEdit(false);
+  };
+  let users = [
+    {
+      id: 9,
+      name: "Samin Anam",
+      email: "samin@gmail.com",
+      designation: "Part-time Teacher",
+      password: "1234",
+      subject: "Math",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
+    },
+    {
+      id: 8,
+      name: "Shamsur Rahman",
+      email: "shams@gmail.com",
+      designation: "Asistant Teacher",
+      password: "1234",
+      subject: "Physics",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
+    },
+    {
+      id: 7,
+      name: "Donald Samit",
+      email: "samit@gmail.com",
+      designation: "Asistant Teacher",
+      password: "12334",
+      subject: "English",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
+    },
     {
       id: 1,
-      name: "Tony Reichert",
-      role: "CEO",
-      team: "Management",
-      status: "active",
-      age: "29",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-      email: "tony.reichert@example.com",
+      name: "Shamsul Arefin",
+      email: "arefin@gmail.com",
+      designation: "Asistant Teacher",
+      password: "1234",
+      subject: "Math",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
     },
     {
       id: 2,
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      team: "Development",
-      status: "paused",
-      age: "25",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-      email: "zoey.lang@example.com",
+      name: "Asaduzzaman Kabir",
+      email: "kabir@gmail.com",
+      designation: "Asistant Teacher",
+      password: "1234",
+      subject: "Bengali",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
     },
     {
       id: 3,
-      name: "Jane Fisher",
-      role: "Senior Developer",
-      team: "Development",
-      status: "active",
-      age: "22",
-      avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-      email: "jane.fisher@example.com",
+      name: "Jannatul Ferdaus Nyma",
+      email: "nyma@gmail.com",
+      designation: "Asistant Teacher",
+      password: "1234",
+      subject: "English",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
     },
     {
       id: 4,
-      name: "William Howard",
-      role: "Community Manager",
-      team: "Marketing",
-      status: "vacation",
-      age: "28",
-      avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-      email: "william.howard@example.com",
+      name: "Ahmed Mostafa",
+      email: "ahmed@gmail.com",
+      designation: "Asistant Teacher",
+      password: "1234",
+      subject: "Math",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
     },
     {
       id: 5,
-      name: "Kristen Copper",
-      role: "Sales Manager",
-      team: "Sales",
-      status: "active",
-      age: "24",
-      avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
-      email: "kristen.cooper@example.com",
+      name: "Abdur Rahim Akash",
+      email: "akash@gmail.com",
+      designation: "Asistant Teacher",
+      password: "1234",
+      subject: "Physics",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
     },
     {
-        id: 6,
-        name: "Tony Reichert",
-        role: "CEO",
-        team: "Management",
-        status: "active",
-        age: "29",
-        avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-        email: "tony.reichert@example.com",
-      },
-      {
-        id: 7,
-        name: "Zoey Lang",
-        role: "Technical Lead",
-        team: "Development",
-        status: "paused",
-        age: "25",
-        avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-        email: "zoey.lang@example.com",
-      },
-      {
-        id: 8,
-        name: "Jane Fisher",
-        role: "Senior Developer",
-        team: "Development",
-        status: "active",
-        age: "22",
-        avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-        email: "jane.fisher@example.com",
-      },
-      {
-        id: 9,
-        name: "William Howard",
-        role: "Community Manager",
-        team: "Marketing",
-        status: "vacation",
-        age: "28",
-        avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-        email: "william.howard@example.com",
-      },
-      {
-        id: 10,
-        name: "Kristen Copper",
-        role: "Sales Manager",
-        team: "Sales",
-        status: "active",
-        age: "24",
-        avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
-        email: "kristen.cooper@example.com",
-      },
+      id: 6,
+      name: "Samuel Test",
+      email: "test@gmail.com",
+      designation: "Part-time Teacher",
+      password: "1234",
+      subject: "English",
+      classes: [3, 4, 5],
+      avatar: "/static/images/teacher.webp",
+    },
   ];
+  useEffect(() => {
+    if (window) {
+      const teachersFromSession = JSON.parse(
+        sessionStorage.getItem("teachers")
+      );
+      setTeachersInSession(teachersFromSession);
+      users = teachersFromSession;
+    }
+  }, []);
+  const columns = [
+    { name: "NAME", uid: "name" },
+    { name: "Designation", uid: "designation" },
+    { name: "ACTIONS", uid: "actions" },
+  ];
+
   const renderCell = (user, columnKey) => {
     const cellValue = user[columnKey];
     switch (columnKey) {
@@ -286,7 +308,7 @@ const TeachersTable = () => {
             {user.email}
           </User>
         );
-      case "role":
+      case "designation":
         return (
           <Col>
             <Row>
@@ -296,13 +318,11 @@ const TeachersTable = () => {
             </Row>
             <Row>
               <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
-                {user.team}
+                {user.subject}
               </Text>
             </Row>
           </Col>
         );
-      case "status":
-        return <StyledBadge type={user.status}>{cellValue}</StyledBadge>;
 
       case "actions":
         return (
@@ -316,7 +336,7 @@ const TeachersTable = () => {
             </Col>
             <Col css={{ d: "flex" }}>
               <Tooltip content="Edit user">
-                <IconButton onClick={() => console.log("Edit user", user.id)}>
+                <IconButton onClick={() => openHandlerEdit(user.id)}>
                   <EditIcon size={20} fill="#979797" />
                 </IconButton>
               </Tooltip>
@@ -339,42 +359,93 @@ const TeachersTable = () => {
     }
   };
   return (
-    <Table
-      ariaLabel="Example table with custom cells"
-      css={{
-        height: "auto",
-        minWidth: "100%",
-      }}
-      selectionMode="none"
-    >
-      <Table.Header columns={columns}>
-        {(column) => (
-          <Table.Column
-            key={column.uid}
-            hideHeader={column.uid === "actions"}
-            align={column.uid === "actions" ? "center" : "start"}
-          >
-            {column.name}
-          </Table.Column>
-        )}
-      </Table.Header>
-      <Table.Body items={users}>
-        {(item) => (
-          <Table.Row>
-            {(columnKey) => (
-              <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
-            )}
-          </Table.Row>
-        )}
-      </Table.Body>
-      <Table.Pagination
-        noMargin
-        align="center"
-        rowsPerPage={8}
-        onPageChange={(page) => console.log({ page })}
-      />
-    </Table>
+    <div>
+      <Table
+        ariaLabel="Example table with custom cells"
+        css={{
+          height: "auto",
+          minWidth: "100%",
+        }}
+        selectionMode="none"
+      >
+        <Table.Header columns={columns}>
+          {(column) => (
+            <Table.Column
+              key={column.uid}
+              hideHeader={column.uid === "actions"}
+              align={column.uid === "actions" ? "center" : "start"}
+            >
+              {column.name}
+            </Table.Column>
+          )}
+        </Table.Header>
+        <Table.Body items={teachersInSession}>
+          {(item) => (
+            <Table.Row>
+              {(columnKey) => (
+                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+              )}
+            </Table.Row>
+          )}
+        </Table.Body>
+        {/* <Table.Pagination
+          noMargin
+          align="center"
+          rowsPerPage={8}
+          onPageChange={(page) => console.log({ page })}
+        /> */}
+      </Table>
+      <Edit props={{ visibleEdit, closeHandlerEdit, submitHandlerEdit }} />
+    </div>
   );
 };
 
 export default TeachersTable;
+
+const Edit = ({ props }) => {
+  const { visibleEdit, closeHandlerEdit, submitHandlerEdit } = props;
+  return (
+    <div>
+      <Modal
+        closeButton
+        blur
+        ariaLabelledby="modal-title"
+        open={visibleEdit}
+        onClose={closeHandlerEdit}
+      >
+        <Modal.Header>
+          <Text id="modal-title" size={18}>
+            Welcome to
+            <Text b size={18}>
+              NGS
+            </Text>
+          </Text>
+        </Modal.Header>
+        <Modal.Body>
+          <Input
+            clearable
+            bordered
+            fullWidth
+            color="primary"
+            size="lg"
+            placeholder="Email"
+          />
+          <Input
+            clearable
+            bordered
+            fullWidth
+            color="primary"
+            size="lg"
+            placeholder="Password"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <div>
+            <ButtonG text="Close" color="error" func={closeHandlerEdit} />
+          </div>
+          <ButtonG text="Sign in" color="primary" func={submitHandlerEdit} />
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};

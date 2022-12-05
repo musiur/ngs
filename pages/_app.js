@@ -6,6 +6,100 @@ import "../styles/globals.css";
 // 1. Import `createTheme`
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { useEffect } from "react";
+
+let teachers = [
+  {
+    id: 9,
+    name: "Samin Anam",
+    email: "samin@gmail.com",
+    designation: "Part-time Teacher",
+    password: "1234",
+    subject: "Math",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 8,
+    name: "Shamsur Rahman",
+    email: "shams@gmail.com",
+    designation: "Asistant Teacher",
+    password: "1234",
+    subject: "Physics",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 7,
+    name: "Donald Samit",
+    email: "samit@gmail.com",
+    designation: "Asistant Teacher",
+    password: "12334",
+    subject: "English",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 1,
+    name: "Shamsul Arefin",
+    email: "arefin@gmail.com",
+    designation: "Asistant Teacher",
+    password: "1234",
+    subject: "Math",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 2,
+    name: "Asaduzzaman Kabir",
+    email: "kabir@gmail.com",
+    designation: "Asistant Teacher",
+    password: "1234",
+    subject: "Bengali",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 3,
+    name: "Jannatul Ferdaus Nyma",
+    email: "nyma@gmail.com",
+    designation: "Asistant Teacher",
+    password: "1234",
+    subject: "English",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 4,
+    name: "Ahmed Mostafa",
+    email: "ahmed@gmail.com",
+    designation: "Asistant Teacher",
+    password: "1234",
+    subject: "Math",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 5,
+    name: "Abdur Rahim Akash",
+    email: "akash@gmail.com",
+    designation: "Asistant Teacher",
+    password: "1234",
+    subject: "Physics",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+  {
+    id: 6,
+    name: "Samuel Test",
+    email: "test@gmail.com",
+    designation: "Part-time Teacher",
+    password: "1234",
+    subject: "English",
+    classes: [3, 4, 5],
+    avatar: "/static/images/teacher.webp",
+  },
+];
 
 // 2. Call `createTheme` and pass your custom values
 const lightTheme = createTheme({
@@ -85,6 +179,13 @@ const darkTheme = createTheme({
 });
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if(window){
+      if(!sessionStorage.getItem("teachers")){
+        sessionStorage.setItem("teachers", JSON.stringify(teachers), 2);
+      }
+    }
+  }, [])
   return (
     <NextThemesProvider
       defaultTheme="system"
