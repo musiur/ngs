@@ -11,6 +11,7 @@ import {
 import { styled } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import ButtonG from "../../ButtonG";
+import EditTeacherData from "./EditTeacherData";
 
 const StyledBadge = styled("span", {
   display: "inline-block",
@@ -182,14 +183,18 @@ const DeleteIcon = ({ fill, size, height, width, ...props }) => {
 const TeachersTable = () => {
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [teachersInSession, setTeachersInSession] = useState([]);
+  const [teacherData, setTeacherData] = useState({});
+
   const openHandlerEdit = (id) => {
+
+    if(window){
+      let teachersDataInSession = JSON.parse(sessionStorage.getItem("teachers"));
+      setTeacherData(teachersDataInSession.find(item => item.id === id));
+    }
+  console.log(teacherData)
     setVisibleEdit(true);
-    console.log(id);
   };
   const closeHandlerEdit = () => {
-    setVisibleEdit(false);
-  };
-  const submitHandlerEdit = () => {
     setVisibleEdit(false);
   };
   let users = [
@@ -293,6 +298,10 @@ const TeachersTable = () => {
       users = teachersFromSession;
     }
   }, []);
+
+  useEffect(() => {
+    users = teachersInSession;
+  }, [teachersInSession]);
   const columns = [
     { name: "NAME", uid: "name" },
     { name: "Designation", uid: "designation" },
@@ -395,7 +404,7 @@ const TeachersTable = () => {
           onPageChange={(page) => console.log({ page })}
         /> */}
       </Table>
-      <Edit props={{ visibleEdit, closeHandlerEdit, submitHandlerEdit }} />
+      <Edit props={{ visibleEdit, closeHandlerEdit, teacherData, setTeachersInSession }} />
     </div>
   );
 };
@@ -403,7 +412,7 @@ const TeachersTable = () => {
 export default TeachersTable;
 
 const Edit = ({ props }) => {
-  const { visibleEdit, closeHandlerEdit, submitHandlerEdit } = props;
+  const { visibleEdit, closeHandlerEdit, teacherData, setTeachersInSession } = props;
   return (
     <div>
       <Modal
@@ -415,36 +424,15 @@ const Edit = ({ props }) => {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            Welcome to
+            Edit Information of {" "}
             <Text b size={18}>
-              NGS
+            ({teacherData.name})
             </Text>
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <Input
-            clearable
-            bordered
-            fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Email"
-          />
-          <Input
-            clearable
-            bordered
-            fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Password"
-          />
+          <EditTeacherData props={{ teacherData, setTeachersInSession }}/>
         </Modal.Body>
-        <Modal.Footer>
-          <div>
-            <ButtonG text="Close" color="error" func={closeHandlerEdit} />
-          </div>
-          <ButtonG text="Sign in" color="primary" func={submitHandlerEdit} />
-        </Modal.Footer>
       </Modal>
     </div>
   );
