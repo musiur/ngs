@@ -186,109 +186,19 @@ const TeachersTable = () => {
   const [teacherData, setTeacherData] = useState({});
 
   const openHandlerEdit = (id) => {
-
-    if(window){
-      let teachersDataInSession = JSON.parse(sessionStorage.getItem("teachers"));
-      setTeacherData(teachersDataInSession.find(item => item.id === id));
+    if (window) {
+      let teachersDataInSession = JSON.parse(
+        sessionStorage.getItem("teachers")
+      );
+      setTeacherData(teachersDataInSession.find((item) => item.id === id));
     }
-  console.log(teacherData)
+    console.log(teacherData);
     setVisibleEdit(true);
   };
   const closeHandlerEdit = () => {
     setVisibleEdit(false);
   };
-  let users = [
-    {
-      id: 9,
-      name: "Samin Anam",
-      email: "samin@gmail.com",
-      designation: "Part-time Teacher",
-      password: "1234",
-      subject: "Math",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 8,
-      name: "Shamsur Rahman",
-      email: "shams@gmail.com",
-      designation: "Asistant Teacher",
-      password: "1234",
-      subject: "Physics",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 7,
-      name: "Donald Samit",
-      email: "samit@gmail.com",
-      designation: "Asistant Teacher",
-      password: "12334",
-      subject: "English",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 1,
-      name: "Shamsul Arefin",
-      email: "arefin@gmail.com",
-      designation: "Asistant Teacher",
-      password: "1234",
-      subject: "Math",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 2,
-      name: "Asaduzzaman Kabir",
-      email: "kabir@gmail.com",
-      designation: "Asistant Teacher",
-      password: "1234",
-      subject: "Bengali",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 3,
-      name: "Jannatul Ferdaus Nyma",
-      email: "nyma@gmail.com",
-      designation: "Asistant Teacher",
-      password: "1234",
-      subject: "English",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 4,
-      name: "Ahmed Mostafa",
-      email: "ahmed@gmail.com",
-      designation: "Asistant Teacher",
-      password: "1234",
-      subject: "Math",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 5,
-      name: "Abdur Rahim Akash",
-      email: "akash@gmail.com",
-      designation: "Asistant Teacher",
-      password: "1234",
-      subject: "Physics",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-    {
-      id: 6,
-      name: "Samuel Test",
-      email: "test@gmail.com",
-      designation: "Part-time Teacher",
-      password: "1234",
-      subject: "English",
-      classes: [3, 4, 5],
-      avatar: "/static/images/teacher.webp",
-    },
-  ];
+  let users = [];
   useEffect(() => {
     if (window) {
       const teachersFromSession = JSON.parse(
@@ -307,6 +217,17 @@ const TeachersTable = () => {
     { name: "Designation", uid: "designation" },
     { name: "ACTIONS", uid: "actions" },
   ];
+
+  const deleteTeacher = (id) => {
+    const teachersFromSession = JSON.parse(
+      sessionStorage.getItem("teachers")
+    );
+    const tempTeacherList = [...teachersFromSession];
+
+    tempTeacherList = tempTeacherList.filter((item) => item.id !== id);
+    sessionStorage.setItem("teachers", JSON.stringify(tempTeacherList), 3);
+    setTeachersInSession(tempTeacherList);
+  };
 
   const renderCell = (user, columnKey) => {
     const cellValue = user[columnKey];
@@ -354,7 +275,7 @@ const TeachersTable = () => {
               <Tooltip
                 content="Delete user"
                 color="error"
-                onClick={() => console.log("Delete user", user.id)}
+                onClick={() => deleteTeacher(user.id)}
               >
                 <IconButton>
                   <DeleteIcon size={20} fill="#FF0080" />
@@ -397,14 +318,15 @@ const TeachersTable = () => {
             </Table.Row>
           )}
         </Table.Body>
-        {/* <Table.Pagination
-          noMargin
-          align="center"
-          rowsPerPage={8}
-          onPageChange={(page) => console.log({ page })}
-        /> */}
       </Table>
-      <Edit props={{ visibleEdit, closeHandlerEdit, teacherData, setTeachersInSession }} />
+      <Edit
+        props={{
+          visibleEdit,
+          closeHandlerEdit,
+          teacherData,
+          setTeachersInSession,
+        }}
+      />
     </div>
   );
 };
@@ -412,7 +334,8 @@ const TeachersTable = () => {
 export default TeachersTable;
 
 const Edit = ({ props }) => {
-  const { visibleEdit, closeHandlerEdit, teacherData, setTeachersInSession } = props;
+  const { visibleEdit, closeHandlerEdit, teacherData, setTeachersInSession } =
+    props;
   return (
     <div>
       <Modal
@@ -424,14 +347,14 @@ const Edit = ({ props }) => {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            Edit Information of {" "}
+            Edit Information of{" "}
             <Text b size={18}>
-            ({teacherData.name})
+              ({teacherData.name})
             </Text>
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <EditTeacherData props={{ teacherData, setTeachersInSession }}/>
+          <EditTeacherData props={{ teacherData, setTeachersInSession }} />
         </Modal.Body>
       </Modal>
     </div>

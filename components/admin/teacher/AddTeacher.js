@@ -48,7 +48,7 @@ const AddTeacher = () => {
     password: "",
     subject: "",
     designation: "",
-    classes: []
+    classes: [],
   });
   const [teachersInSession, setTeachersInSession] = useState([]);
   const [message, setMessage] = useState(false);
@@ -59,17 +59,21 @@ const AddTeacher = () => {
 
   const handleAPI = () => {
     console.log(formData);
+    const teachersFromSession = JSON.parse(
+      sessionStorage.getItem("teachers")
+    );
     const newTeacher = {
-      id: teachersInSession.length + 1,
+      id: teachersFromSession.length + 1,
       name: formData.name,
       email: formData.email,
       designation: formData.designation,
       password: formData.password,
       subject: formData.subject,
-      classes: [3, 4, 5],
+      classes: formData.classes ? formData.classes : [3, 4, 5],
       avatar: "/static/images/teacher.webp",
     };
-    const allTeacher = [newTeacher,...teachersInSession];
+    
+    const allTeacher = [newTeacher, ...teachersFromSession];
     if (window) {
       sessionStorage.setItem("teachers", JSON.stringify(allTeacher));
 
