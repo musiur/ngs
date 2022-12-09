@@ -1,6 +1,7 @@
 import { Input, Dropdown } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import ButtonG from "../../ButtonG";
+import AddClasses from "./AddClasses";
 
 const Mail = ({ fill, size, height, width, ...props }) => {
   return (
@@ -45,6 +46,9 @@ const AddTeacher = () => {
     name: "",
     email: "",
     password: "",
+    subject: "",
+    designation: "",
+    classes: []
   });
   const [teachersInSession, setTeachersInSession] = useState([]);
   const [message, setMessage] = useState(false);
@@ -149,6 +153,7 @@ const AddTeacher = () => {
           name="password"
           label="Password"
         />
+        <AddClasses />
         <ButtonG
           text="Add new"
           color="primary"
